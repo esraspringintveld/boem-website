@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOEM — Bewust Omgaan met Eten en je Mindset</title>
+<meta name="description" content="BOEM is jouw persoonlijke app tijdens het traject: volg je voortgang, vier je mijlpalen en vind alles op één plek.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --groen:#35513f; --groen-hover:#2b4434; --kop:#24352a; --tekst:#2c3a2f; --tekst2:#3c463a;
+    --zacht:#4f6049; --grijs:#67715f; --achter:#f7f8f4; --vak:#e9f0e5; --rand:#8cb98a;
+    --m-vak:#dce9f1; --m-rand:#a8c8da; --m-tekst:#1e3346;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--achter);color:var(--tekst);font-family:'Figtree',system-ui,sans-serif;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+  a{color:var(--groen)} a:hover{color:var(--groen-hover)}
+  .serif{font-family:'Newsreader',Georgia,serif}
+  .wrap{max-width:1120px;margin:0 auto;padding-left:24px;padding-right:24px}
+  .label{font-size:13px;letter-spacing:.18em;color:var(--zacht);text-transform:uppercase}
+  h1,h2,h3{margin:0;font-family:'Newsreader',Georgia,serif;font-weight:400;color:var(--kop)}
+  p{margin:0}
+  .knop{display:inline-block;text-decoration:none;background:var(--groen);color:#fff;font-weight:600;border:0;cursor:pointer;font-family:inherit;transition:background .15s}
+  .knop:hover{background:var(--groen-hover);color:#fff}
+
+  header{display:flex;align-items:center;gap:14px;padding-top:22px;padding-bottom:22px}
+  .logo{width:44px;height:44px;border-radius:14px;background:var(--groen);display:flex;align-items:center;justify-content:center;flex:none}
+  .logo span{width:32px;height:32px;border-radius:50%;border:2px solid var(--rand);display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:9.5px;letter-spacing:.06em;color:#f4f7f1}
+  .merk{flex:1;font-family:'Newsreader',serif;font-size:20px;color:var(--kop)}
+  header .knop{padding:11px 18px;border-radius:18px;font-size:14.5px}
+
+  .hero{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-top:40px;padding-bottom:72px}
+  .hero-tekst{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:22px}
+  .hero h1{font-size:clamp(40px,6vw,64px);line-height:1.05}
+  .hero h1 em{color:var(--groen)}
+  .hero-tekst p{font-size:18px;line-height:1.6;color:var(--tekst2);max-width:520px}
+  .knoppen{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .knoppen .knop{padding:15px 24px;border-radius:22px;font-size:16px}
+  .knoppen .link{text-decoration:none;padding:15px 12px;font-size:15px;font-weight:500}
+
+  .telefoon{flex:0 1 360px;margin:0 auto;background:#f2f5ee;border-radius:38px;padding:22px 18px 18px;box-shadow:0 20px 50px rgba(53,81,63,.18);display:flex;flex-direction:column;gap:12px}
+  .klein{font-size:12px;letter-spacing:.14em;color:var(--grijs);text-transform:uppercase}
+  .voortgang{background:var(--vak);border:1.5px solid var(--rand);border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+  .balk{height:8px;border-radius:4px;background:#fff;overflow:hidden}
+  .balk div{width:58%;height:100%;background:var(--groen);border-radius:4px}
+  .tegels{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tegels div{border-radius:20px;padding:13px 14px;font-size:14px;font-weight:600}
+
+  .donker{background:var(--groen);color:#f4f7f1}
+  .donker .inhoud{max-width:820px;margin:0 auto;padding:80px 24px;display:flex;flex-direction:column;gap:18px}
+  .donker h2{color:#f4f7f1;font-size:clamp(32px,4.5vw,46px);line-height:1.12}
+  .donker p{font-size:18px;line-height:1.65;color:#e3ece0}
+
+  .sectie-kop{display:flex;flex-direction:column;gap:10px;max-width:640px}
+  .sectie-kop h2,.app h2{font-size:clamp(30px,4vw,42px);line-height:1.12}
+  .werelden{padding-top:80px;padding-bottom:40px;display:flex;flex-direction:column;gap:28px}
+  .twee{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+  .wereld{border-radius:30px;padding:30px;display:flex;flex-direction:column;gap:12px}
+  .wereld .icoon{font-size:32px}
+  .wereld h3{font-size:32px}
+  .wereld p{font-size:16px;line-height:1.6}
+
+  .app{padding-top:40px;padding-bottom:88px;display:flex;flex-direction:column;gap:28px}
+  .kaarten{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+  .kaart{background:#fff;border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 0 rgba(53,81,63,.06)}
+  .kaart .icoon{width:44px;height:44px;border-radius:15px;background:var(--vak);display:flex;align-items:center;justify-content:center;font-size:21px}
+  .kaart h3{margin-top:4px;font-weight:500;font-size:22px}
+  .kaart p{font-size:15.5px;line-height:1.6;color:var(--tekst2)}
+
+  .community{padding-bottom:88px}
+  .community > div{background:#fff;border-radius:30px;padding:32px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center}
+  .community h3{font-weight:500;font-size:26px}
+  .community p{font-size:16px;line-height:1.6;color:var(--tekst2)}
+
+  .quote{background:var(--vak);border-top:1.5px solid var(--rand);border-bottom:1.5px solid var(--rand)}
+  .quote div{max-width:820px;margin:0 auto;padding:72px 24px;text-align:center;font-family:'Newsreader',serif;font-style:italic;font-size:clamp(30px,4.5vw,46px);color:var(--groen);line-height:1.2}
+
+  .aanmelden{padding-top:88px;padding-bottom:88px;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;scroll-margin-top:10px}
+  .aanmelden .links{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px}
+  .aanmelden h2{font-size:clamp(32px,4.5vw,46px);line-height:1.1}
+  .aanmelden .links p{font-size:17px;line-height:1.65;color:var(--tekst2);max-width:460px}
+  .formvak{flex:1 1 400px;min-width:0;background:#fff;border-radius:30px;padding:28px;box-shadow:0 14px 40px rgba(53,81,63,.12)}
+  form{display:flex;flex-direction:column;gap:14px}
+  label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+  input{font:inherit;font-weight:400;font-size:16px;padding:14px 16px;border-radius:16px;border:1.5px solid #cfdcc9;background:var(--achter);color:var(--tekst);outline:none;width:100%}
+  input:focus{border-color:var(--groen)}
+  input::placeholder{color:#8a9486}
+  form .knop{margin-top:6px;padding:15px;border-radius:20px;font-size:16px;width:100%}
+  form .knop:disabled{opacity:.7;cursor:default}
+  .notitie{font-size:13.5px;line-height:1.5;color:var(--grijs);text-align:center}
+  .fout{display:none;background:#fbecea;color:#8a2f25;border-radius:14px;padding:12px 14px;font-size:14.5px;text-align:center}
+  .gelukt{display:none;flex-direction:column;gap:10px;padding:20px 0;text-align:center}
+  .gelukt h3{font-size:26px}
+  .gelukt p{font-size:16px;line-height:1.6;color:var(--tekst2)}
+
+  footer{border-top:1px solid #dfe7da}
+  footer div{padding-top:28px;padding-bottom:28px;font-size:13.5px;color:var(--grijs)}
+
+  @media (max-width:600px){
+    .hero{gap:40px;padding-top:24px}
+    .donker .inhoud{padding:56px 20px}
+    .werelden{padding-top:56px}
+    .aanmelden{padding-top:64px;padding-bottom:64px}
+    .formvak,.community > div{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="logo"><span>BOEM</span></div>
+  <div class="merk">BOEM</div>
+  <a href="#aanmelden" class="knop">Toegang aanvragen</a>
+</header>
+
+<section class="wrap hero">
+  <div class="hero-tekst">
+    <div class="label">Bewust omgaan met eten en je mindset</div>
+    <h1>Jouw reis naar <em>jouw beste zelf</em></h1>
+    <p>Volg jouw voortgang, vier je mijlpalen en houd je motivatie hoog: met een persoonlijke app die jouw hele reis bijhoudt.</p>
+    <div class="knoppen">
+      <a href="#aanmelden" class="knop">Ik wil toegang 🌿</a>
+      <a href="#app" class="link">Wat zit erin ↓</a>
+    </div>
+  </div>
+
+  <div class="telefoon" aria-hidden="true">
+    <div style="padding:2px 4px">
+      <div class="klein">Donderdag · Fase 2</div>
+      <div class="serif" style="font-size:26px;color:var(--kop);margin-top:4px">Goedemorgen, Sanne</div>
+    </div>
+    <div class="voortgang">
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <div class="serif" style="font-size:40px;color:var(--kop);line-height:1">−4,6</div>
+        <div style="font-size:14px;color:var(--zacht)">kg sinds de start</div>
+      </div>
+      <div class="balk"><div></div></div>
+      <div style="font-size:12.5px;color:var(--zacht)">58% van je doel · 🔥 12 dagen op rij gewogen</div>
+    </div>
+    <div style="background:#fff;border-radius:24px;padding:15px 18px">
+      <div class="klein">Vandaag</div>
+      <div class="serif" style="font-style:italic;font-size:18px;color:var(--groen);margin-top:6px;line-height:1.35">"Kleine stapjes, grote reis."</div>
+    </div>
+    <div class="tegels">
+      <div style="background:var(--vak);color:var(--kop)">😊 Dagboek</div>
+      <div style="background:var(--m-vak);color:var(--m-tekst)">📚 Bibliotheek</div>
+    </div>
+  </div>
+</section>
+
+<section class="donker">
+  <div class="inhoud">
+    <div class="label" style="color:#b9d6b6">Wat is BOEM?</div>
+    <h2>Een app die jou centraal zet</h2>
+    <p>BOEM is jouw persoonlijke digitale begeleider tijdens het traject. Je volgt je eigen voortgang, ziet je resultaten groeien en vindt alles wat je nodig hebt op één plek. Simpel, overzichtelijk en helemaal van jou.</p>
+  </div>
+</section>
+
+<section class="wrap werelden">
+  <div class="sectie-kop">
+    <div class="label">Twee werelden</div>
+    <h2>Jij kiest waar je begint</h2>
+  </div>
+  <div class="twee">
+    <div class="wereld" style="background:var(--vak);border:1.5px solid var(--rand)">
+      <div class="icoon">🥗</div>
+      <h3>Eten</h3>
+      <p style="color:var(--tekst2)">Fases, weging, voedingslijsten en recepten. Stap voor stap anders leren eten.</p>
+    </div>
+    <div class="wereld" style="background:var(--m-vak);border:1.5px solid var(--m-rand)">
+      <div class="icoon">🧠</div>
+      <h3 style="color:var(--m-tekst)">Mindset</h3>
+      <p style="color:#2f4150">Bewuster kijken naar je gewoontes, je gevoel en wat je echt nodig hebt.</p>
+    </div>
+  </div>
+</section>
+
+<section id="app" class="wrap app">
+  <h2>Wat zit er in de app?</h2>
+  <div class="kaarten">
+    <div class="kaart"><div class="icoon">📊</div><h3>Persoonlijk dashboard</h3><p>Zie in één oogopslag hoeveel je al bereikt hebt en wat je doel is. Jouw eigen cijfers, jouw eigen voortgang.</p></div>
+    <div class="kaart"><div class="icoon">🎉</div><h3>Mijlpalen</h3><p>Bij elke mijlpaal een feestje! De app viert je overwinningen met je mee, van de eerste kilo tot het einddoel.</p></div>
+    <div class="kaart"><div class="icoon">📅</div><h3>Fases</h3><p>Altijd overzicht van in welke fase je zit, wanneer je wisselt en wat er in elke fase bij hoort, met de voedingslijst per fase.</p></div>
+    <div class="kaart"><div class="icoon">😊</div><h3>Dagboek</h3><p>Hoe was je dag? Tik een emoji aan en kies waar je trots op bent. Voor jezelf, niet voor anderen.</p></div>
+    <div class="kaart"><div class="icoon">📚</div><h3>Bibliotheek</h3><p>Recepten, video's en pdf's. Alles op één plek.</p></div>
+    <div class="kaart"><div class="icoon">🔥</div><h3>Weegstreak</h3><p>Hoeveel dagen op rij ben jij al bezig? De app houdt het bij en viert je consistentie.</p></div>
+    <div class="kaart"><div class="icoon">💬</div><h3>Dagelijkse motivatiequote</h3><p>Elke dag een nieuwe quote om je dag goed te beginnen. Warm, aanmoedigend en nooit zwaar.</p></div>
+  </div>
+</section>
+
+<section class="wrap community">
+  <div>
+    <div style="font-size:34px">🤝</div>
+    <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:6px">
+      <h3>En naast de app: de community</h3>
+      <p>Een besloten WhatsApp-community voor deelnemers, met een groep voor Eten en een groep voor Mindset. Om inspiratie te delen, vragen te stellen en elkaar een hand toe te steken.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quote"><div>"Kleine stapjes, grote reis."</div></section>
+
+<section id="aanmelden" class="wrap aanmelden">
+  <div class="links">
+    <div class="label">Toegang aanvragen</div>
+    <h2>Doe je mee?</h2>
+    <p>Meld je aan en ontvang toegang tot jouw persoonlijke BOEM-app. Exclusief voor deelnemers aan het traject.</p>
+  </div>
+  <div class="formvak">
+    <div class="gelukt" id="gelukt">
+      <div style="font-size:36px">🌿</div>
+      <h3>Gelukt!</h3>
+      <p>Je aanmelding is ontvangen. Je hoort snel van me zodra je toegang is goedgekeurd.</p>
+    </div>
+    <form id="boem-form" novalidate>
+      <label>Je naam
+        <input type="text" name="naam" placeholder="Voornaam" autocomplete="given-name" required>
+      </label>
+      <label>Je e-mailadres
+        <input type="email" name="email" placeholder="naam@voorbeeld.nl" autocomplete="email" required>
+      </label>
+      <div class="fout" id="fout" role="alert">Er ging iets mis. Probeer het opnieuw.</div>
+      <button type="submit" class="knop" id="knop">Ik wil toegang</button>
+      <div class="notitie">Je ontvangt een bevestiging zodra je toegang is goedgekeurd. Geen spam, beloofd.</div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 BOEM · Gemaakt met 🌿 voor jouw reis</div></footer>
+
+<script>
+  // Aanmelding gaat naar het MailerLite-formulier van BOEM (openbaar formulier, geen API-sleutel nodig).
+  const MAILERLITE_URL = 'https://assets.mailerlite.com/jsonp/435060/forms/198229033518892247/subscribe';
+
+  const form = document.getElementById('boem-form');
+  const knop = document.getElementById('knop');
+  const fout = document.getElementById('fout');
+  const gelukt = document.getElementById('gelukt');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const naam = form.naam.value.trim();
+    const email = form.email.value.trim();
+    fout.style.display = 'none';
+
+    if (!naam || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      fout.textContent = 'Vul je naam en een geldig e-mailadres in.';
+      fout.style.display = 'block';
+      return;
+    }
+
+    knop.disabled = true;
+    knop.textContent = 'Bezig...';
+
+    try {
+      const data = new FormData();
+      data.append('fields[email]', email);
+      data.append('fields[name]', naam);
+      data.append('ml-submit', '1');
+      data.append('anticsrf', 'true');
+      const res = await fetch(MAILERLITE_URL, { method: 'POST', body: data });
+      const json = await res.json();
+      if (!json.success) throw new Error('mislukt');
+      form.style.display = 'none';
+      gelukt.style.display = 'flex';
+    } catch (err) {
+      fout.textContent = 'Er ging iets mis. Probeer het opnieuw.';
+      fout.style.display = 'block';
+      knop.disabled = false;
+      knop.textContent = 'Ik wil toegang';
+    }
+  });
+</script>
+</body>
+</html>
